@@ -40,7 +40,7 @@ fn main() {
     let canvas = Rc::new(RefCell::new(canvas));
     let dvd_logo = Rc::new(RefCell::new(DVDLogo {
         rect: Rect::new(0, 0, 140, 100),
-        velocity: Velocity { x: -2, y: -2 },
+        velocity: Velocity { x: -4, y: -4 },
         color: Color::RGB(0, 255, 255),
     }));
 

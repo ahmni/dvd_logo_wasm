@@ -1,6 +1,5 @@
 #!/bin/bash
 
-export EMCC_CFLAGS="-s USE_SDL=2"
 set -eu
 
 cargo build --target=wasm32-unknown-emscripten --release
