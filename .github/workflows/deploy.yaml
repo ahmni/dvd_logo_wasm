@@ -1,11 +1,13 @@
 name: Github Pages
 
-on: [push]
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
 
 permissions:
   contents: write
 
-#dsja
 jobs:
   build-github-pages:
     runs-on: ubuntu-latest
@@ -14,6 +16,8 @@ jobs:
       - uses: mymindstorm/setup-emsdk@v11 # setup emscripten toolchain
         with:
           version: 3.1.51
+      - name: Verify
+        run: emcc -v
       - uses: actions-rs/toolchain@v1 # get rust toolchain for wasm
         with:
           toolchain: stable
@@ -21,10 +25,8 @@ jobs:
           override: true
       - name: Rust Cache # cache the rust build artefacts
         uses: Swatinem/rust-cache@v1
-      - name: Build App
-        run: cargo build --release --target=wasm32-unknown-emscripten
       - name: Build # build
-        run: ./setup_web.sh
+        run: ./build.sh
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
